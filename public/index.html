@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FBI Sign In</title>
+  <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body id="body">
+  <div class="container text-center">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Seal_of_the_FBI.svg" alt="FBI Logo" class="logo">
+    <h1 class="title">FBI System</h1>
+    <div class="card card-principal bg-dark text-center">
+      <div class="card-body">
+        <form id="signinForm">
+          <h5 class="card-title text-center subtitle">Ingrese sus credenciales</h5>
+          <div class="row d-flex align-items-center mb-1">
+            <div class="col-12">Email:</div>
+            <div class="col-7 m-auto"><input type="text" id="email" class="form-control" /></div>
+          </div>
+          <div class="row d-flex align-items-center">
+            <div class="col-12">Password:</div>
+            <div class="col-7 m-auto"><input type="password" id="password" class="form-control" /></div>
+          </div>
+          <br>
+          <p><button type="submit" id="loginButton" class="btn text-light my-3">Ingresar</button></p>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.getElementById('signinForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('/signin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        if (!response.ok) {
+          throw new Error('Credenciales incorrectas');
+        }
+
+        const { token } = await response.json();
+        sessionStorage.setItem('token', token);
+        window.location.href = 'welcome.html';
+      } catch (error) {
+        console.error(error.message);
+        alert('Error al iniciar sesión');
+      }
+    });
+  </script>
+</body>
+</html>

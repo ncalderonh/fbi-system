@@ -1,0 +1,21 @@
+{
+  "name": "fbi-system",
+  "version": "1.0.0",
+  "description": "Sistema de gestión de misiones secretas para el FBI",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Nicolás Cnpmalderón",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}
